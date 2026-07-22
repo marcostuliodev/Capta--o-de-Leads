@@ -10,7 +10,7 @@
 <body>
     <header class="topbar">
         <div class="container nav-row">
-            <div class="brand">Especial <span>Orquídeas</span></div>
+                <img src="especial orquídeas.webp" alt="Especial Orquídeas"class="brand">
             <nav>
                 <a href="#beneficios">Benefícios</a>
                 <a href="#conteudo">Conteúdo</a>
@@ -40,7 +40,7 @@
                     <div class="mini-badge">E-book gratuito</div>
                     <h2>O guia que revela os 7 erros mais comuns no cuidado com orquídeas</h2>
                     <ul>
-                        <li>Como regar sem estragar a raiz</li>
+                        <li>Como regar sem prejudicar a raiz</li>
                         <li>O que fazer para estimular a floração</li>
                         <li>Como evitar doenças e manchas</li>
                         <li>Como manter a planta sempre vibrante</li>
@@ -63,7 +63,7 @@
                         <p>Aprenda a criar as condições certas para que suas orquídeas floresçam com mais frequência.</p>
                     </article>
                     <article>
-                        <h3>Evitar os erros que mais matam flores</h3>
+                        <h3>Evitar os erros que mais matam a planta</h3>
                         <p>Descubra os sinais de alerta, os cuidados básicos e as melhores práticas para manter a planta viva e bonita.</p>
                     </article>
                 </div>
@@ -73,7 +73,7 @@
         <section class="content-section" id="conteudo">
             <div class="container two-column">
                 <div>
-                    <p class="section-tag">Persuasão + clareza + ação</p>
+                    <!-- <p class="section-tag">Persuasão + clareza + ação</p> -->
                     <h2>Você não precisa adivinhar mais nada.</h2>
                     <p>Enquanto outras pessoas erram por falta de informação, você terá acesso a um guia simples, direto e muito eficaz para cuidar melhor das suas orquídeas.</p>
                     <p>Esse material foi pensado para acelerar sua curva de aprendizado e eliminar a incerteza em poucos minutos.</p>
@@ -89,13 +89,13 @@
         <section class="capture" id="cadastro">
             <div class="container capture-grid">
                 <div class="capture-copy">
-                    <p class="section-tag">Oferta irresistível</p>
+                    <!-- <p class="section-tag">Oferta irresistível</p> -->
                     <h2>Entre agora no clube do cuidado certo</h2>
                     <p>Seu acesso é imediato e totalmente gratuito. Não é uma promessa vazia: é um guia prático para quem quer resultados reais, sem complicação.</p>
                     <p class="urgency">⚡ Acesso liberado agora. A oferta é gratuita por tempo limitado.</p>
                 </div>
 
-                <form id="lead-form" class="lead-form" data-script-url="COLOQUE_A_URL_DO_SEU_APPS_SCRIPT_AQUI" data-ebook-url="COLOQUE_O_LINK_DO_SEU_EBOOK_AQUI">
+                <form id="lead-form" class="lead-form" data-script-url="https://script.google.com/macros/s/AKfycbwAmwP4LG7Ontj531IKOtrj-YC6pEOh5Q7Q1Kuj8aBQ42NuKUIBJKMYOcQsplX1dHQ3tQ/exec" data-ebook-url="E-book.pdf">
                     <label>
                         Nome
                         <input type="text" name="nome" placeholder="Seu nome" required>
@@ -105,10 +105,24 @@
                         E-mail
                         <input type="email" name="email" placeholder="seu@email.com" required>
                     </label>
-
+                    <label>
+                        Idade
+                        <input type="number" name="idade" placeholder="Sua idade" required min="1" max="99" inputmode="numeric" minlength="2" oninput="this.value = this.value.slice(0, 2)">
+                    </label>
+                    <label>
+                        Qual genero se identifica?
+                        <input type="text" name="genero" placeholder="Gênero" required>
+                    </label>
+                    <div class="consent-box">
+                        <label class="consent-label">
+                            <input type="checkbox" name="consentimento" required>
+                            <span>Eu li e concordo com a coleta e o uso dos meus dados pessoais para receber o e-book e comunicações relacionadas, conforme a <a href="politica-privacidade.html" target="_blank" rel="noreferrer">política de privacidade</a>.</span>
+                        </label>
+                        <p class="consent-note">Seus dados serão usados apenas para envio do material solicitado, contato administrativo e comunicação relacionada ao e-book. Você pode solicitar exclusão a qualquer momento.</p>
+                    </div>
                     <button type="submit" class="btn-primary full">Quero meu e-book</button>
                     <p id="form-status" class="form-status" aria-live="polite"></p>
-                    <a id="download-link" class="download-link" href="#" target="_blank" rel="noreferrer">Baixar e-book</a>
+                    <a id="download-link" class="download-link" href="#" target="_blank" rel="noreferrer" style="display: none;">Baixar e-book</a>
                 </form>
             </div>
         </section>

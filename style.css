@@ -47,6 +47,7 @@ body {
 }
 
 .brand {
+    width: 10em;
     font-size: 1.2rem;
     font-weight: 700;
 }
@@ -198,13 +199,45 @@ h1 {
     font-weight: 700;
 }
 
-.lead-form input {
+.lead-form input[type="text"],
+.lead-form input[type="email"],
+.lead-form input[type="number"] {
     width: 100%;
     margin-top: 8px;
     padding: 12px 14px;
     border-radius: 10px;
     border: 1px solid #c7c0b6;
     font-size: 1rem;
+}
+
+.consent-box {
+    margin: 18px 0 20px;
+    padding: 14px;
+    border: 1px solid #d9d1c3;
+    border-radius: 12px;
+    background: #fbfaf7;
+}
+
+.consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.consent-label input {
+    margin-top: 3px;
+}
+
+.consent-label a {
+    color: var(--brand);
+}
+
+.consent-note {
+    margin: 10px 0 0;
+    font-size: 0.93rem;
+    color: var(--muted);
 }
 
 .form-status {
