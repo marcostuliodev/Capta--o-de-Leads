@@ -1,6 +1,15 @@
 const form = document.getElementById('lead-form');
 const statusMessage = document.getElementById('form-status');
 const downloadLink = document.getElementById('download-link');
+let formInteracted = false;
+let leadSubmitted = false;
+let abandonmentTracked = false;
+
+function trackMetaEvent(eventName) {
+    if (typeof window.fbq === 'function') {
+        window.fbq('trackCustom', eventName);
+    }
+}
 
 function normalizeScriptUrl(value) {
     if (!value) return '';
@@ -31,6 +40,16 @@ if (form) {
     if (downloadLink) {
         downloadLink.href = ebookUrl;
     }
+
+    const markFormInteraction = () => {
+        if (!formInteracted) {
+            formInteracted = true;
+            trackMetaEvent('LeadFormStarted');
+        }
+    };
+
+    form.addEventListener('focusin', markFormInteraction, { once: true });
+    form.addEventListener('input', markFormInteraction, { once: true });
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -88,9 +107,8 @@ if (form) {
             }
 
             statusMessage.textContent = 'Seu acesso foi liberado com sucesso! Use o botão abaixo para baixar o e-book.';
-            if (typeof window.fbq === 'function') {
-                window.fbq('track', 'Lead');
-            }
+            leadSubmitted = true;
+            window.fbq?.('track', 'Lead');
             if (downloadLink && ebookUrl && !ebookUrl.includes('COLOQUE')) {
                 downloadLink.style.display = 'inline-block';
             }
@@ -110,5 +128,12 @@ if (form) {
         } finally {
             form.removeAttribute('aria-busy');
         }
+    });
+
+    window.addEventListener('pagehide', () => {
+        if (leadSubmitted || abandonmentTracked) return;
+
+        abandonmentTracked = true;
+        trackMetaEvent(formInteracted ? 'LeadFormAbandoned' : 'LeadFormNotStarted');
     });
 }
