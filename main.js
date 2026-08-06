@@ -51,7 +51,11 @@ if (form) {
 
         try {
             const parsedScriptUrl = new URL(scriptUrl);
-            if (parsedScriptUrl.protocol !== 'https:') {
+            const isGoogleAppsScript = parsedScriptUrl.protocol === 'https:'
+                && parsedScriptUrl.hostname === 'script.google.com'
+                && /^\/macros\/s\/[^/]+\/(exec|dev)$/.test(parsedScriptUrl.pathname);
+
+            if (!isGoogleAppsScript) {
                 throw new Error('URL inválida.');
             }
         } catch (error) {
@@ -63,6 +67,7 @@ if (form) {
         const payload = new URLSearchParams(formData).toString();
 
         statusMessage.textContent = 'Enviando seus dados...';
+        form.setAttribute('aria-busy', 'true');
 
         try {
             const response = await fetch(scriptUrl, {
@@ -83,6 +88,9 @@ if (form) {
             }
 
             statusMessage.textContent = 'Seu acesso foi liberado com sucesso! Use o botão abaixo para baixar o e-book.';
+            if (typeof window.fbq === 'function') {
+                window.fbq('track', 'Lead');
+            }
             if (downloadLink && ebookUrl && !ebookUrl.includes('COLOQUE')) {
                 downloadLink.style.display = 'inline-block';
             }
@@ -99,6 +107,8 @@ if (form) {
             }
 
             statusMessage.textContent = message;
+        } finally {
+            form.removeAttribute('aria-busy');
         }
     });
 }
